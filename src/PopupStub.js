@@ -3,7 +3,7 @@
  */
 'use strict'
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { View, Platform, BackHandler, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 import uuidV1 from 'uuid/v1'
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class PopupStub extends PureComponent {
+export default class PopupStub extends Component {
   /* @private */
   static _stub = null
   static _orderId = 0

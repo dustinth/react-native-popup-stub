@@ -1,4 +1,4 @@
-import react, { PureComponent, ReactElement } from 'react'
+import react, { Component, ReactElement } from 'react'
 import { ViewProperties } from 'react-native'
 
 type UUID = string
@@ -33,7 +33,7 @@ interface PopupStupProps extends ViewProperties {
   maskAnimatable?: boolean;
 }
 
-interface PopupStubStatic extends PureComponent<PopupStupProps> {
+interface PopupStubStatic extends Component<PopupStupProps> {
   /*
    * Ref. Do Not Use It Directly.
   */
