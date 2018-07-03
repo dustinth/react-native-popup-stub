@@ -1,4 +1,4 @@
-import PopupStub from './PopupStub'
+import PopupStub from './src/PopupStub'
 
 export {
   PopupStub

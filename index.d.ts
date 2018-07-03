@@ -37,7 +37,7 @@ interface PopupStubStatic extends PureComponent<PopupStupProps> {
   /*
    * Ref. Do Not Use It Directly.
   */
-  sub: React.Ref<PopupStubStatic>;
+  stub: React.Ref<PopupStubStatic>;
 
   /**
    * Initialize PopupStub instance
