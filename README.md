@@ -94,6 +94,37 @@ Invoke popup exiting animation and remove it on animation end
 | --- | --- | --- |
 | id | String | popup unique id |
 
+### PopupStub.removePopupImmediately(id)
+
+Remove a popup without animation
+
+### PopupStub.resetPopupProperty(id, key, value)
+
+Reset certain property of a popup.
+
+Key 'id' and which starts with underscore can't be changed.
+
+### PopupStub.removeAll(filter)
+
+Remove popups immediately by condition.
+
+Param filter is a function, and should **return false** to remove.
+
+If ignored, remove all.
+
+Example:
+
+```
+PopupStup.removeAll(popup => {
+  if (popup should be reserved) {
+    return true
+  } else {
+    // otherwise, remove
+    return false
+  }
+})
+```
+
 ## Example
 
 First, add PopupStub as sibling node of your Root Node

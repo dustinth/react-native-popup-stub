@@ -88,14 +88,9 @@ interface PopupStubStatic extends Component<PopupStupProps> {
   resetPopupProperty(id?: UUID, key?: string, value?: any): void;
 
   /*
-   * Save status
+   * Remove popups by filter
   */
-  save (): void;
-
-  /*
-   * Restore status
-  */
-  restore (): void;
+  removeAll (filter?: Function): void;
 }
 
 declare var PopupStub: PopupStubStatic

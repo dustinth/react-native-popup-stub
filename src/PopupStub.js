@@ -104,12 +104,8 @@ export default class PopupStub extends Component {
     }
   }
 
-  static save () {
-    PopupStub.stub.save()
-  }
-
-  static restore () {
-    PopupStub.stub.restore()
+  static removeAll (filter) {
+    PopupStub.stub.removeAll(filter)
   }
 
   constructor (props) {
@@ -335,33 +331,30 @@ export default class PopupStub extends Component {
     }
   }
 
-  _setVisibleAll (visible) {
+  /*
+   * Remove popups immediately by condition
+   * @private
+   * @function removeAll
+   * @param {Function} filter choose which popups to be removed, return false to remove. If ignored, remove all.
+  */
+  removeAll (filter) {
     let popups = this.state.popups
 
-    for (let key of popups.keys()) {
-      let popup = popups.get(key)
-      popup.visible = hide
+    if (popups.size === 0) {
+      return
+    }
+
+    if (typeof filter === 'function') {
+      popups = new Map(
+        [...popups.values()].filter(filter).map(popup => {
+          return [popup.id, popup]
+        })
+      )
+    } else {
+      popups = new Map()
     }
 
     this.setState({popups})
-  }
-
-  /*
-   * save status，render nothing
-  */
-  save () {
-    if (this.state.popups.size > 0) {
-      this._setVisibleAll(false)
-    }
-  }
-
-  /*
-   * restore status，render all
-  */
-  restore () {
-    if (this.state.popups.size > 0) {
-      this._setVisibleAll(true)
-    }
   }
 
   render () {
