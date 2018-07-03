@@ -104,6 +104,14 @@ export default class PopupStub extends PureComponent {
     }
   }
 
+  static save () {
+    PopupStub.stub.save()
+  }
+
+  static restore () {
+    PopupStub.stub.restore()
+  }
+
   constructor (props) {
     super(props)
 
@@ -324,6 +332,35 @@ export default class PopupStub extends PureComponent {
     if (popup && popup.hasOwnProperty(key)) {
       popup[key] = value
       this.setState({popups})
+    }
+  }
+
+  _setVisibleAll (visible) {
+    let popups = this.state.popups
+
+    for (let key of popups.keys()) {
+      let popup = popups.get(key)
+      popup.visible = hide
+    }
+
+    this.setState({popups})
+  }
+
+  /*
+   * save status，render nothing
+  */
+  save () {
+    if (this.state.popups.size > 0) {
+      this._setVisibleAll(false)
+    }
+  }
+
+  /*
+   * restore status，render all
+  */
+  restore () {
+    if (this.state.popups.size > 0) {
+      this._setVisibleAll(true)
     }
   }
 

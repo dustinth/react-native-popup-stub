@@ -86,6 +86,16 @@ interface PopupStubStatic extends PureComponent<PopupStupProps> {
    * Reset property of specified popup
    */
   resetPopupProperty(id?: UUID, key?: string, value?: any): void;
+
+  /*
+   * Save status
+  */
+  save (): void;
+
+  /*
+   * Restore status
+  */
+  restore (): void;
 }
 
 declare var PopupStub: PopupStubStatic
