@@ -19,7 +19,7 @@ export type PopupStubOption = {
   lock?: boolean;
   mask?: boolean;
   maskDuration?: number;
-  onBackPress?: FunctionConstructor;
+  onBackPress?: (id: UUID) => boolean;
   visible?: boolean;
   // style related
   position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';
@@ -34,6 +34,7 @@ interface PopupStupProps extends ViewProperties {
 }
 
 interface PopupStubStatic extends Component<PopupStupProps> {
+  constructor (): PopupStubStatic;
   /*
    * Ref. Do Not Use It Directly.
   */

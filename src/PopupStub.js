@@ -119,7 +119,7 @@ export default class PopupStub extends Component {
     this._onBackAndroid = this._onBackAndroid.bind(this)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid)
     }
@@ -151,19 +151,22 @@ export default class PopupStub extends Component {
       return a._orderId - b._orderId
     }).pop()
 
-    if (popup._closing) {
-      // all closing
-      return true
+    if (popup._closing || !popup.visible) {
+      // all closing or unvisible
+      return false
     }
 
     if (popup.autoClose && popup.visible) {
       this.removePopup(popup.id)
+
+      return true
     } else if (popup.onBackPress) {
       // leave it to invoker
-      popup.onBackPress(popup.id)
+      return popup.onBackPress(popup.id)
     }
 
-    return true
+    // 冒泡
+    return false
   }
 
   // sort by zIndex
@@ -227,7 +230,7 @@ export default class PopupStub extends Component {
   }
 
   /*
-   * Prepare for playback animatino
+   * Prepare for playback animation
    * @private
   */
   _beforeClosing (popup) {
