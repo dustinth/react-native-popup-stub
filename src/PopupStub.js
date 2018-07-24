@@ -165,7 +165,7 @@ export default class PopupStub extends Component {
       return popup.onBackPress(popup.id)
     }
 
-    // 冒泡
+    // bubble up
     return false
   }
 
