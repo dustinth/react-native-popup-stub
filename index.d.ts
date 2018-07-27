@@ -19,7 +19,7 @@ export type PopupStubOption = {
   lock?: boolean;
   mask?: boolean;
   maskDuration?: number;
-  onBackPress?: (id: UUID) => boolean;
+  onPressBack?: (id: UUID) => boolean;
   visible?: boolean;
   // style related
   position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';
@@ -51,10 +51,11 @@ interface PopupStubStatic extends Component<PopupStupProps> {
 
   /**
    * Return true if any popup is displaying, otherwise return false
+   * Will always skip unvisible popups
    *
-   * @param ignoreClosing - default false
+   * @param filter - return true as isShow
    */
-  isShow (ignoreClosing?: boolean): boolean;
+  isShow (filter?: Function): boolean;
 
   /**
    * Create an unique id with UUID algorithm

@@ -4,6 +4,7 @@
 import uuidV1 from 'uuid/v1'
 import createWrapperStyle from './createWrapperStyle'
 import log from './log'
+import { falseValue } from './shared'
 
 const DEFAULT_PROPS = {
   // priority of each popup in PopupStub
@@ -24,7 +25,7 @@ const DEFAULT_PROPS = {
   // when locked, it will stop all clicks, like loading
   lock: false,
   // Android back event trigger, if not autoClose
-  onBackPress: undefined,
+  onPressBack: falseValue,
   // whether to render this popup
   // useful when you jump from pages but hold the popup status
   // however, remember to close it afterwards
@@ -36,12 +37,6 @@ const DEFAULT_PROPS = {
 }
 
 export default function createPopup (element, option, props) {
-  if (option && typeof option === 'string') {
-    // This warning is for original version, and will be removed in future
-    log('`id` parameter is deprecated, use `option` instead.', true)
-    option = {id: option}
-  }
-
   let popup = {
     ...DEFAULT_PROPS,
     ...option,

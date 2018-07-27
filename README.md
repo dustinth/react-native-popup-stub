@@ -75,7 +75,7 @@ autoClose: true,
 // when locked, it will stop all clicks, like loading
 lock: false,
 // Android back event trigger, if not autoClose；should return boolean, see RN BackHandler.
-onBackPress: undefined,
+onPressBack: () => false,
 // whether to render this popup
 // useful when you jump from pages but hold the popup status
 // however, remember to close it afterwards

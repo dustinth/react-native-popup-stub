@@ -11,6 +11,7 @@ import log from './util/log'
 import createPopup from './util/createPopup'
 import animatedPopup from './util/animatedPopup'
 import { reverseKeyframes } from './util/keyframes'
+import { isFunction, trueValue } from './util/shared'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -24,9 +25,20 @@ const styles = StyleSheet.create({
 })
 
 export default class PopupStub extends Component {
-  /* @private */
   static _stub = null
   static _orderId = 0
+
+  static propTypes = {
+    // mask color for all popups
+    maskColor: PropTypes.string,
+    // whether enable mask animation
+    maskAnimatable: PropTypes.bool
+  }
+
+  static defaultProps = {
+    maskColor: 'rgba(23,26,35,0.6)',
+    maskAnimatable: false
+  }
 
   static get stub () {
     return PopupStub._stub
@@ -41,17 +53,17 @@ export default class PopupStub extends Component {
   }
 
   /*
-   * Check if there is a popup showing
-   * @param {Boolean} [ignoreClosing=false] if true, closing popup is ignored
+   * Check if there is a popup showing, will always skip unvisible popups
+   * @param {Function} [filter] return true as isShow
    * @return {Boolean}
   */
-  static isShow (ignoreClosing) {
+  static isShow (filter = trueValue) {
     if (!PopupStub.stub) return false
 
     const popups = PopupStub.stub.state.popups
 
     for (let popup of popups.values()) {
-      if (popup.visible && (!ignoreClosing || (ignoreClosing && !popup._closing))) {
+      if (popup.visible && filter(popup)) {
         return true
       }
     }
@@ -61,18 +73,6 @@ export default class PopupStub extends Component {
 
   static getNewId () {
     return uuidV1()
-  }
-
-  static propTypes = {
-    // mask color for all popups
-    maskColor: PropTypes.string,
-    // whether enable mask animation
-    maskAnimatable: PropTypes.bool
-  }
-
-  static defaultProps = {
-    maskColor: 'rgba(23,26,35,0.6)',
-    maskAnimatable: false
   }
 
   // static method is easier to use
@@ -115,8 +115,6 @@ export default class PopupStub extends Component {
       // popup raw data
       popups: new Map()
     }
-
-    this._onBackAndroid = this._onBackAndroid.bind(this)
   }
 
   componentDidMount () {
@@ -132,7 +130,7 @@ export default class PopupStub extends Component {
   }
 
   // auto close on back event
-  _onBackAndroid () {
+  _onBackAndroid = () => {
     let popups = this.state.popups
     if (popups.size === 0) {
       // nothing to do
@@ -160,13 +158,11 @@ export default class PopupStub extends Component {
       this.removePopup(popup.id)
 
       return true
-    } else if (popup.onBackPress) {
-      // leave it to invoker
-      return popup.onBackPress(popup.id)
+    } else {
+      // leave it to invoker,
+      // by default return false to bubble up
+      return popup.onPressBack(popup.id)
     }
-
-    // bubble up
-    return false
   }
 
   // sort by zIndex
@@ -347,7 +343,7 @@ export default class PopupStub extends Component {
       return
     }
 
-    if (typeof filter === 'function') {
+    if (isFunction(filter)) {
       popups = new Map(
         [...popups.values()].filter(filter).map(popup => {
           return [popup.id, popup]
