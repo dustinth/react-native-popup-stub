@@ -101,8 +101,10 @@ interface PopupStubStatic extends Component<PopupStupProps> {
 
   /*
    * Remove popups by filter
+   *
+   * @param filter - return true to remove
   */
-  removeAll (filter?: (o: PopupInstance, i: number) => boolean): void;
+  removeAll (filter?: (o: PopupInstance) => boolean): void;
 }
 
 declare var PopupStub: PopupStubStatic

@@ -62,7 +62,7 @@ returns (String) unique id
 zIndex: 1,
 // animation related
 duration: 1000,
-// default 'none' might be better?
+// popup position, relative to screen
 position: 'center',
 // has a visual mask or not
 mask: true,
@@ -70,7 +70,6 @@ mask: true,
 maskDuration: 100,
 // enable clicking mask to close or not,
 // can be closed on android back too.
-// default true
 autoClose: true,
 // when locked, it will stop all clicks, like loading
 lock: false,
@@ -78,7 +77,7 @@ lock: false,
 onPressBack: () => false,
 // whether to render this popup
 // useful when you jump from pages but hold the popup status
-// however, remember to close it afterwards
+// however, remember to remove it afterwards
 visible: true
 // content animation
 // animation: default animation
@@ -113,7 +112,7 @@ Key 'id' and which starts with underscore can't be changed.
 
 Remove popups immediately by condition.
 
-Param filter is a function, and should **return true** to remove.
+Param *filter* is a function, and should **return true** to remove.
 
 If ignored, remove all.
 
@@ -121,11 +120,30 @@ Example:
 
 ```
 PopupStup.removeAll(popup => {
-  if (popup should be reserved) {
+  if (popup should be removed) {
     return true
   } else {
-    // otherwise, remove
+    // otherwise, reserve
     return false
+  }
+})
+```
+
+### PopupStub.isShow(filter)
+
+Check if there is a popup showing, will always skip unvisible popups.
+
+Param *filter* is a function, return true means is showing.
+
+Example:
+
+```
+PopupStup.isShow(popup => {
+  // ignore closing popups
+  if (!popup._closing) {
+    return false
+  } else {
+    return true
   }
 })
 ```

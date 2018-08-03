@@ -360,8 +360,8 @@ export default class PopupStub extends Component {
 
     if (isFunction(filter)) {
       popups = new Map(
-        [...popups.values()].filter((o, i) => {
-          const shouldRemove = filter(o, i)
+        [...popups.values()].filter(o => {
+          const shouldRemove = filter(o)
           if (shouldRemove && isFunction(o.onClosed)) {
             funclist.push(o.onClosed)
           }
