@@ -1,5 +1,4 @@
 import react, { Component, ReactElement } from 'react'
-import { ViewProperties } from 'react-native'
 
 type UUID = string
 
@@ -24,9 +23,21 @@ export type PopupStubOption = {
   // style related
   position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';
   wrapperStyle?: object;
+  // lifecycle
+  onAdded?: Function;
+  onClosed?: Function;
 }
 
-interface PopupStupProps extends ViewProperties {
+export type PopupInstance = PopupStubOption & {
+  // if is closing
+  _closing?: boolean;
+  // react element
+  _element: ReactElement<any>;
+}
+
+interface PopupStupProps {
+  // Ref handler
+  ref: (o: React.Ref<PopupStubStatic>) => void;
   // mask color for all popups
   maskColor?: string;
   // whether enable mask animation
@@ -34,7 +45,6 @@ interface PopupStupProps extends ViewProperties {
 }
 
 interface PopupStubStatic extends Component<PopupStupProps> {
-  constructor (): PopupStubStatic;
   /*
    * Ref. Do Not Use It Directly.
   */
@@ -55,7 +65,7 @@ interface PopupStubStatic extends Component<PopupStupProps> {
    *
    * @param filter - return true as isShow
    */
-  isShow (filter?: Function): boolean;
+  isShow (filter?: (o: PopupInstance) => boolean): boolean;
 
   /**
    * Create an unique id with UUID algorithm
@@ -92,7 +102,7 @@ interface PopupStubStatic extends Component<PopupStupProps> {
   /*
    * Remove popups by filter
   */
-  removeAll (filter?: Function): void;
+  removeAll (filter?: (o: PopupInstance, i: number) => boolean): void;
 }
 
 declare var PopupStub: PopupStubStatic

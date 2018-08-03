@@ -84,6 +84,11 @@ visible: true
 // animation: default animation
 // closingAnimation: by default, reversed animation
 // duration, direction, delay, etc.
+
+// lifecycle: invoke on added
+onAdded: undefined
+// lifecycle: invoke after closed
+onClosed: undefined
 ```
 
 ### PopupStub.removePopup(id)
@@ -108,7 +113,7 @@ Key 'id' and which starts with underscore can't be changed.
 
 Remove popups immediately by condition.
 
-Param filter is a function, and should **return false** to remove.
+Param filter is a function, and should **return true** to remove.
 
 If ignored, remove all.
 
@@ -245,11 +250,6 @@ const styles = StyleSheet.create({
   }
 })
 ```
-
-## Todo
-
-- [ ] Support popup life circle callback or so
-- [ ] Use native animation api instead of react-native-animation
 
 ## License
 All rights reserved.

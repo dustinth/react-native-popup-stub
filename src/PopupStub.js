@@ -218,9 +218,13 @@ export default class PopupStub extends Component {
       // cause it has compatible problem in android devices,
       // so sort by hand.
       popups: this._sortPopups(popups)
+    }, () => {
+      log('added ' + newPopup.id)
+      // lifecycle: created
+      if (isFunction(newPopup.onAdded)) {
+        newPopup.onAdded()
+      }
     })
-
-    log('added ' + newPopup.id)
 
     return newPopup.id
   }
@@ -301,9 +305,18 @@ export default class PopupStub extends Component {
   removePopupImmediately (id) {
     let popups = this.state.popups
     if (popups.has(id)) {
+      // save close handler
+      let onClosed = popups.get(id).onClosed
+      // remove popup
       popups.delete(id)
-      this.setState({popups})
-      log('closed ' + id)
+      this.setState({ popups }, () => {
+        log('closed ' + id)
+        // lifecycle: closed
+        if (isFunction(onClosed)) {
+          onClosed()
+        }
+      })
+
       return true
     }
 
@@ -334,7 +347,7 @@ export default class PopupStub extends Component {
    * Remove popups immediately by condition
    * @private
    * @function removeAll
-   * @param {Function} filter choose which popups to be removed, return false to remove. If ignored, remove all.
+   * @param {Function} filter choose which popups to be removed, return true to remove. If ignored, remove all.
   */
   removeAll (filter) {
     let popups = this.state.popups
@@ -343,17 +356,32 @@ export default class PopupStub extends Component {
       return
     }
 
+    let funclist = [] // save close listener before removing
+
     if (isFunction(filter)) {
       popups = new Map(
-        [...popups.values()].filter(filter).map(popup => {
+        [...popups.values()].filter((o, i) => {
+          const shouldRemove = filter(o, i)
+          if (shouldRemove && isFunction(o.onClosed)) {
+            funclist.push(o.onClosed)
+          }
+          return !shouldRemove
+        }).map(popup => {
           return [popup.id, popup]
         })
       )
     } else {
+      [...popups.values()].forEach(o => {
+        if (isFunction(o.onClosed)) {
+          funclist.push(o.onClosed)
+        }
+      })
       popups = new Map()
     }
 
-    this.setState({popups})
+    this.setState({ popups }, () => {
+      funclist.forEach(f => f())
+    })
   }
 
   render () {

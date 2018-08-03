@@ -1,5 +1,5 @@
 /*
- * 包装popup元素，以便进行动画
+ * wrap popup element for animation
 */
 
 import React from 'react'
@@ -15,7 +15,7 @@ export default function animatedPopup (popup, onAutoClose) {
       key={popup.id}
       pointerEvents={pointerEvents}
       style={[
-        styles.full,
+        StyleSheet.absoluteFill,
         popup.position === 'center' ? styles.posCenter : null
       ]}
     >
@@ -25,9 +25,13 @@ export default function animatedPopup (popup, onAutoClose) {
               duration={popup.maskDuration}
               delay={popup._maskDelay}
               animation={popup._maskAnimation}
-              style={styles.full}
+              style={StyleSheet.absoluteFill}
             />
-          : <View style={[styles.full, {backgroundColor: popup._maskColor}]} />}
+          : <View style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: popup._maskColor }
+            ]} />
+        }
       </TouchableWithoutFeedback> : null}
       <Animatable.View
         delay={popup.delay}
@@ -61,12 +65,5 @@ const styles = StyleSheet.create({
   posCenter: {
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  full: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0
   }
 })
