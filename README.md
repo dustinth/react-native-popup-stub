@@ -1,7 +1,6 @@
 # react-native-popup-stub
 
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+Forded from [@unpourtous/react-native-stub-toast/PopupStub](https://github.com/UnPourTous/react-native-popup-stub)
 
 ## Introduction
 
@@ -12,17 +11,7 @@ Popup global controller:
 - Make it easy to implement your own popup like Dialog, Toast, ActionSheet
 - Support landscape and portrait automatically
 
-Derived from @unpourtous/react-native-stub-toast/PopupStub.
-
 Animation is based on [react-native-animatable](https://github.com/oblador/react-native-animatable)
-
-### Demo
-![demo](https://user-images.githubusercontent.com/1309744/30198225-2636557c-949f-11e7-8bda-b2a72b7ad91e.gif)
-
-## Installation
-```
-npm install @unpourtous/react-native-popup-stub --save
-```
 
 ## APIs
 
@@ -270,4 +259,5 @@ const styles = StyleSheet.create({
 ```
 
 ## License
-All rights reserved.
+
+MIT

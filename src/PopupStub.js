@@ -13,17 +13,6 @@ import animatedPopup from './util/animatedPopup'
 import { reverseKeyframes } from './util/keyframes'
 import { isFunction, trueValue } from './util/shared'
 
-const styles = StyleSheet.create({
-  wrapper: {
-    overflow: 'visible',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0
-  }
-})
-
 export default class PopupStub extends Component {
   static _stub = null
   static _orderId = 0
@@ -401,7 +390,7 @@ export default class PopupStub extends Component {
     return (
       <View
         pointerEvents={hasMask ? 'box-none' : 'none'}
-        style={styles.wrapper}>
+        style={StyleSheet.absoluteFill}>
         { rendered }
       </View>
     )
