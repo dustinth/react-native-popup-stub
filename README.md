@@ -23,7 +23,6 @@ PopupStub properties
 | --- | --- | --- |
 | maskColor | String | mask color, default 'rgba(23,26,35,0.6)' |
 | maskAnimatable | Boolean | whether enable mask animation, default false |
-| orientation | Enum | deprecated, no need any more |
 
 ### PopupStub.init(ref)
 
@@ -58,7 +57,8 @@ mask: true,
 // duration of mask animation (if enabled)
 maskDuration: 100,
 // enable clicking mask to close or not,
-// （can always be closed on android back）.
+// default false to avoid unintended closing.
+// (But will always be closed on android back key).
 autoClose: false,
 // when locked, it will stop all clicks, like loading
 lock: false,
@@ -120,7 +120,7 @@ PopupStup.removeAll(popup => {
 
 Check if there is a popup showing, will always skip unvisible popups.
 
-Param *filter* is a function, return true means is showing.
+Param *filter* is a function, return true means should be showing.
 
 Example:
 

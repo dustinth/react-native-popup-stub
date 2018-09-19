@@ -19,8 +19,8 @@ const DEFAULT_PROPS = {
   // duration of mask animation (if enabled)
   maskDuration: 100,
   // enable clicking mask to close or not,
-  // can be closed on android back too.
-  // default false
+  // default false to avoid unintended closing.
+  // (But will always be closed on android back key).
   autoClose: false,
   // when locked, it will stop all clicks, like loading
   lock: false,
