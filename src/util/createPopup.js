@@ -20,12 +20,10 @@ const DEFAULT_PROPS = {
   maskDuration: 100,
   // enable clicking mask to close or not,
   // can be closed on android back too.
-  // default true
-  autoClose: true,
+  // default false
+  autoClose: false,
   // when locked, it will stop all clicks, like loading
   lock: false,
-  // Android back event trigger, if not autoClose
-  onPressBack: falseValue,
   // whether to render this popup
   // useful when you jump from pages but hold the popup status
   // however, remember to close it afterwards

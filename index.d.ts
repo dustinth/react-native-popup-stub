@@ -18,7 +18,6 @@ export type PopupStubOption = {
   lock?: boolean;
   mask?: boolean;
   maskDuration?: number;
-  onPressBack?: (id: UUID) => boolean;
   visible?: boolean;
   // style related
   position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';

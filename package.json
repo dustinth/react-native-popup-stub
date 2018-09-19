@@ -1,13 +1,11 @@
 {
-  "name": "@unpourtous/react-native-popup-stub",
-  "version": "2.0.3",
+  "name": "@TreeNewbie/react-native-popup-stub",
+  "version": "2.1.0",
   "description": "A popup container for implements your own popups like ActionSheet, Dialog, Alert, Toast ...",
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run-android": "cd example; react-native run-android; cd -",
-    "run-ios": "cd example; react-native run-ios; cd -"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "react-native",
@@ -16,7 +14,7 @@
     "Alert",
     "Toast"
   ],
-  "author": "erichua, lemori",
+  "author": "lemori",
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -37,9 +35,5 @@
   "dependencies": {
     "react-native-animatable": "^1.2.3",
     "uuid": "^3.1.0"
-  },
-  "peerDependencies": {
-    "react": "^15.4.2",
-    "react-native": "^0.40.0"
   }
 }

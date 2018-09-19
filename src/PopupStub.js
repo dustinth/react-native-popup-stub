@@ -143,15 +143,10 @@ export default class PopupStub extends Component {
       return false
     }
 
-    if (popup.autoClose && popup.visible) {
-      this.removePopup(popup.id)
+    // always remove
+    this.removePopup(popup.id)
 
-      return true
-    } else {
-      // leave it to invoker,
-      // by default return false to bubble up
-      return popup.onPressBack(popup.id)
-    }
+    return true
   }
 
   // sort by zIndex

@@ -58,12 +58,10 @@ mask: true,
 // duration of mask animation (if enabled)
 maskDuration: 100,
 // enable clicking mask to close or not,
-// can be closed on android back too.
-autoClose: true,
+// （can always be closed on android back）.
+autoClose: false,
 // when locked, it will stop all clicks, like loading
 lock: false,
-// Android back event trigger, if not autoClose；should return boolean, see RN BackHandler.
-onPressBack: () => false,
 // whether to render this popup
 // useful when you jump from pages but hold the popup status
 // however, remember to remove it afterwards
