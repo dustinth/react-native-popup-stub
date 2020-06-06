@@ -1,4 +1,4 @@
-import react, { Component, ReactElement } from 'react'
+import react, { ComponentType, ReactElement } from 'react'
 
 type UUID = string
 
@@ -43,7 +43,7 @@ interface PopupStupProps {
   maskAnimatable?: boolean;
 }
 
-interface PopupStubStatic extends Component<PopupStupProps> {
+interface PopupStubStatic extends ComponentType<PopupStupProps> {
   /*
    * Ref. Do Not Use It Directly.
   */
