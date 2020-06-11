@@ -1,45 +1,58 @@
 import react, { Component, ReactElement } from 'react'
+import { ViewStyle } from 'react-native'
 
 type UUID = string
+export type saferObject = Record<string, unknown>
+export type SaferFunc = (...args: unknown[]) => unknown
 
-export type PopupStubOption = {
-  id?: UUID;
-  // priority
+export type PopupConfigOption = {
+  // Default 1
   zIndex: number;
-  // animation related
+  // Default 1000
+  duration?: number;
+  // Default false
+  autoClose?: boolean;
+  // Default false
+  lock?: boolean;
+
+  // Default true
+  mask?: boolean;
+  maskAnimatable?: boolean
+  // Default 100
+  maskDuration?: number;
+
+  // Default true
+  visible?: boolean;
+  // Default 'center'
+  position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';
+  
+  wrapperStyle?: ViewStyle;
+  maskColor?: string
+
+  onAdded?: SaferFunc;
+  onClosed?: SaferFunc;
+
+  direction?: 'normal' | 'reverse' | 'alternate'| 'alternate-reverse';
+
   animation?: string | object;
   closingAnimation?: string | object;
-  delay?: number;
-  duration?: number;
-  direction?: 'normal' | 'reverse' | 'alternate'| 'alternate-reverse';
+
   easing?: string;
-  // interactive related
-  autoClose?: boolean;
-  lock?: boolean;
-  mask?: boolean;
-  maskDuration?: number;
-  visible?: boolean;
-  // style related
-  position?: 'center' | 'none' | 'top' | 'right' | 'bottom' | 'left';
-  wrapperStyle?: object;
-  // lifecycle
-  onAdded?: Function;
-  onClosed?: Function;
+  delay?: number;
+}
+
+export type PopupStubOption = PopupConfigOption & {
+  id?: UUID;
 }
 
 export type PopupInstance = PopupStubOption & {
-  // if is closing
   _closing?: boolean;
-  // react element
   _element: ReactElement<any>;
 }
 
 interface PopupStupProps {
-  // Ref handler
   ref: (o: React.Ref<PopupStubStatic>) => void;
-  // mask color for all popups
   maskColor?: string;
-  // whether enable mask animation
   maskAnimatable?: boolean;
 }
 
