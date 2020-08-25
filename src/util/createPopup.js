@@ -39,7 +39,7 @@ export default function createPopup (element, option, props) {
     ...DEFAULT_PROPS,
     ...option,
     _element: element,
-    _maskColor: props.maskColor,
+    _maskColor: option.maskColor || props.maskColor,
     _maskAnimatable: props.maskAnimatable
   }
 
