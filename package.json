@@ -1,6 +1,6 @@
 {
   "name": "@treenewbie/react-native-popup-stub",
-  "version": "2.1.0",
+  "version": "2.1.2.dustin",
   "description": "A popup container for implements your own popups like ActionSheet, Dialog, Alert, Toast ...",
   "main": "index.js",
   "typings": "index.d.ts",
